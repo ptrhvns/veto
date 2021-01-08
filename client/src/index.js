@@ -1,4 +1,5 @@
 // import reportWebVitals from './reportWebVitals';
+import 'whatwg-fetch';
 import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
