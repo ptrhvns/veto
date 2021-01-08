@@ -1,5 +1,15 @@
+import { buildTitle } from './utils';
+import { Helmet } from 'react-helmet';
+
 function App() {
-  return <div>App</div>;
+  return (
+    <>
+      <Helmet>
+        <title>{buildTitle()}</title>
+      </Helmet>
+      <div>App</div>
+    </>
+  );
 }
 
 export default App;
