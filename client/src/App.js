@@ -1,13 +1,15 @@
 import { buildTitle } from './utils';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function App() {
   return (
     <>
-      <Helmet>
-        <title>{buildTitle()}</title>
-      </Helmet>
-      <div>App</div>
+      <HelmetProvider>
+        <Helmet>
+          <title>{buildTitle()}</title>
+        </Helmet>
+        <div>App</div>
+      </HelmetProvider>
     </>
   );
 }
