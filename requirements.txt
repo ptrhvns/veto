@@ -1,2 +1,4 @@
 gunicorn==20.0.4
 python-dotenv==0.15.0
+simplejson==3.17.2
+
