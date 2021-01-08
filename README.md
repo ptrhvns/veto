@@ -2,6 +2,8 @@
 
 ## Setup Development Environment
 
+Note that Veto was developed on a Linux operating system.
+
 - Install programming language version managers:
 
   - https://github.com/pyenv/pyenv
