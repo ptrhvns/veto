@@ -51,9 +51,19 @@ Note that Veto was developed on a Linux operating system.
 
 ## Setup Production Environment
 
+- Setup environment variables:
+
   ```sh
   heroku config:set FLASK_APP=server.app:app
   heroku config:set FLASK_ENV=production
   # Set a specific key, or generate a random one like this:
   heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
+  ```
+
+## Release (Deploy) Production
+
+- Release the production app:
+
+  ```sh
+  invoke -r ops/lib release
   ```
