@@ -8,7 +8,7 @@ function App() {
         <Helmet>
           <title>{buildTitle()}</title>
         </Helmet>
-        <div>App</div>
+        <div>Hi, Kerry!</div>
       </HelmetProvider>
     </>
   );
