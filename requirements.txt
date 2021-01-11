@@ -1,4 +1,5 @@
 flask==1.1.2
 gunicorn==20.0.4
+invoke==1.5.0
 python-dotenv==0.15.0
 simplejson==3.17.2
