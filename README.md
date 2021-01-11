@@ -49,6 +49,20 @@ Note that Veto was developed on a Linux operating system.
   # SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
   ```
 
+- When working in development, start both the client app and the server app.
+  The client app will proxy API calls to the server. (In production, only the
+  server will be started. The client will be built as a set of static assets,
+  and served by the server when visiting the root route):
+
+  ```sh
+  # In one terminal.
+  cd client
+  npm start
+
+  # In another terminal.
+  flask run
+  ```
+
 ## Setup Production Environment
 
 - Setup environment variables:
@@ -60,9 +74,9 @@ Note that Veto was developed on a Linux operating system.
   heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
   ```
 
-## Release (Deploy) Production
+## Release Production
 
-- Release the production app:
+- Build and deploy the production app to Heroku:
 
   ```sh
   invoke -r ops/lib release
