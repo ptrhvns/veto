@@ -1,5 +1,7 @@
 # Veto
 
+This app helps users in a group select from a list of choices.
+
 ## Setup Development Environment
 
 Note that Veto was developed on a Linux operating system.
@@ -37,4 +39,21 @@ Note that Veto was developed on a Linux operating system.
   ```sh
   cd client
   npm install
+  ```
+
+- Setup environment variables:
+
+  ```sh
+  cp .env.example .env
+  # Edit values in .env.
+  # SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
+  ```
+
+## Setup Production Environment
+
+  ```sh
+  heroku config:set FLASK_APP=server.app:app
+  heroku config:set FLASK_ENV=production
+  # Set a specific key, or generate a random one like this:
+  heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
   ```
