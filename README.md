@@ -1,10 +1,10 @@
 # Veto
 
-This app helps users in a group select from a list of choices.
+This app helps users in a group select from a list of choices. It was developed
+on a Linux operating system for deployment to Heroku. The following notes may
+only be useful once someone has already setup the Heroku infrastructure.
 
-## Setup Development Environment
-
-Note that Veto was developed on a Linux operating system.
+## Setting Up a Development Environment
 
 - Install programming language version managers:
 
@@ -63,7 +63,7 @@ Note that Veto was developed on a Linux operating system.
   flask run
   ```
 
-## Setup Production Environment
+## Setting Up a Production Environment
 
 - Setup environment variables:
 
@@ -74,7 +74,7 @@ Note that Veto was developed on a Linux operating system.
   heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
   ```
 
-## Release Production
+## Releasing to Production
 
 - Build and deploy the production app to Heroku:
 
