@@ -1,4 +1,4 @@
-import { buildTitle } from './utils';
+import { buildTitle } from '../lib/utils';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function App() {
