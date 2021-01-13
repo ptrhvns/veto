@@ -12,19 +12,17 @@ def is_client_asset(path):
 
 
 def create_app():
-    # Sideline the static folder to facilitate proper handling of routes on
-    # both the client and the server side.
+    # Rename the static folder to something unused to prevent those routes from
+    # interferring with client routing.
     app = Flask(__name__, static_folder="invalid")
 
     app.config.from_mapping(
         SECRET_KEY=os.getenv("SECRET_KEY", "devkey"),
     )
 
-    # This route should be defined last. It's only useful if the client has
-    # been built (i.e the client/build directory exists), and so is only really
-    # useful in production, or for testing production-like scenarios. It's
-    # designed to redirect all routes not otherwise specified to the client
-    # where client-side routing will take over.
+    # This route should be defined last. It's only used once the client has
+    # been built for production (i.e the client/build). It lets the client
+    # handle routing not otherwise specified in the server.
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:filename>")
     def index(filename):
