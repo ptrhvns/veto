@@ -26,9 +26,9 @@ def create_app():
     # designed to redirect all routes not otherwise specified to the client
     # where client-side routing will take over.
     @app.route("/", defaults={"path": ""})
-    @app.route("/<path:path>")
-    def index(path):
-        file = path if is_client_asset(path) else "index.html"
-        return send_from_directory(CLIENT_DIR, file)
+    @app.route("/<path:filename>")
+    def index(filename):
+        f = filename if is_client_asset(filename) else "index.html"
+        return send_from_directory(CLIENT_DIR, f)
 
     return app
