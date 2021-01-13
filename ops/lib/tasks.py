@@ -1,5 +1,5 @@
-import contextlib
-import os
+#  import contextlib
+#  import os
 import sys
 from pathlib import Path
 
@@ -26,36 +26,48 @@ def alert(message):
     econsole.print(f"### ERROR: {message}", style="alert")
 
 
-@contextlib.contextmanager
-def cd(directory):
-    """Temporarily change directory."""
-    savedir = os.getcwd()
-    os.chdir(os.path.expanduser(directory))
-    try:
-        yield
-    finally:
-        os.chdir(savedir)
+#  @contextlib.contextmanager
+#  def cd(directory):
+#      """Temporarily change directory."""
+#      savedir = os.getcwd()
+#      os.chdir(os.path.expanduser(directory))
+#      try:
+#          yield
+#      finally:
+#          os.chdir(savedir)
+
+
+def run(ctx, cmd):
+    result = ctx.run(cmd, warn=True)
+    if result.failed:
+        alert(f"Command failed: {cmd}")
+        sys.exit(1)
 
 
 @task
 def release(c):
     """Build and deploy the app to production on Heroku."""
-    with cd("client"):
-        notify("Building client")
-        c.run("npm run build")
 
     root_directory = str(Path(__file__).resolve().parent.parent.parent)
     repo = Repo(root_directory)
 
     if repo.is_dirty():
+        alert("Git repo is dirty")
+        sys.exit(1)
+
+    notify("Building client")
+    with c.cd("client"):
+        run(c, "npm run build")
+
+    if repo.is_dirty():
         notify("Adding new client build assets to Git repo")
-        c.run("git add client/build")
-        result = c.run("git commit -m 'Add new client build assets'")
-        if result.failed:
-            alert("Git commit of new client build assets returned error")
-            sys.exit(1)
+        run(c, "git add client/build")
+        run(c, "git commit -m 'Add new client build assets'")
     else:
         notify("No change detected in client build assets")
 
-    notify("Pushing Git repo to Heroku")
-    c.run("git push heroku main")
+    notify("Pushing Git repo to origin remote")
+    run(c, "git push origin main")
+
+    notify("Pushing Git repo to heroku remote")
+    run(c, "git push heroku main")
