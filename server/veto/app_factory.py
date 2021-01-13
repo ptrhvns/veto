@@ -4,13 +4,11 @@ from pathlib import Path
 
 from flask import Flask, send_from_directory
 
-CLIENT_DIRECTORY = str(
-    Path(__file__).resolve().parent.parent.parent / "client" / "build"
-)
+CLIENT_DIR = str(Path(__file__).resolve().parent.parent.parent / "client" / "build")
 
 
 def is_client_asset_path(path):
-    return path != "" and os.path.exists(os.path.join(CLIENT_DIRECTORY, path))
+    return path != "" and os.path.exists(os.path.join(CLIENT_DIR, path))
 
 
 def create_app():
@@ -30,8 +28,8 @@ def create_app():
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:path>")
     def index(path):
-        if is_client_asset_path(app, path):
-            return send_from_directory(CLIENT_DIRECTORY, path)
-        return send_from_directory(CLIENT_DIRECTORY, "index.html")
+        if is_client_asset_path(path):
+            return send_from_directory(CLIENT_DIR, path)
+        return send_from_directory(CLIENT_DIR, "index.html")
 
     return app
