@@ -9,7 +9,7 @@ CLIENT_DIRECTORY = str(
 )
 
 
-def is_client_asset_path(app, path):
+def is_client_asset_path(path):
     return path != "" and os.path.exists(os.path.join(CLIENT_DIRECTORY, path))
 
 
