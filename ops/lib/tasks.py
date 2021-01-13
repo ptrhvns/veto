@@ -46,7 +46,7 @@ def run(ctx, cmd):
 
 @task
 def release(c):
-    """Build and deploy the app to production on Heroku."""
+    """Build and release the app."""
 
     root_directory = str(Path(__file__).resolve().parent.parent.parent)
     repo = Repo(root_directory)
