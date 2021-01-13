@@ -28,8 +28,7 @@ def create_app():
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:path>")
     def index(path):
-        if is_client_asset_path(path):
-            return send_from_directory(CLIENT_DIR, path)
-        return send_from_directory(CLIENT_DIR, "index.html")
+        file = path if is_client_asset_path(path) else "index.html"
+        return send_from_directory(CLIENT_DIR, file)
 
     return app
