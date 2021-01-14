@@ -1,3 +1,5 @@
+*.egg-info
 .env
 .python-version
 __pycache__
+server/.coverage
