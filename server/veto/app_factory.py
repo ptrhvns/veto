@@ -24,9 +24,9 @@ def create_app(config=None):
     if config:
         app.config.from_mapping(config)
 
-    @app.route("/api/signup", methods=("GET", "POST"))
-    def signup():
-        return {"msg": "This has not been implemented yet."}
+    @app.route("/api/health")
+    def health():
+        return {"msg": "OK"}
 
     # This route should be defined last. It's only used with the client
     # production build (i.e the client/build directory exists). It lets the
