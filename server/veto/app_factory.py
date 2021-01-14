@@ -22,7 +22,7 @@ def create_app():
     )
 
     # This route should be defined last. It's only used once the client has
-    # been built for production (i.e the client/build). It lets the client
+    # been built for production (i.e client/build exists). It lets the client
     # handle routing not otherwise specified in the server.
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:filename>")
