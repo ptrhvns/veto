@@ -21,9 +21,9 @@ def create_app():
         SECRET_KEY=os.getenv("SECRET_KEY", "devkey"),
     )
 
-    # This route should be defined last. It's only used once the client has
-    # been built for production (i.e client/build exists). It lets the client
-    # handle routing not otherwise specified by the server.
+    # This route should be defined last. It's only used with the client
+    # production build (i.e the client/build directory exists). It lets the
+    # client handle routing not otherwise specified by the server.
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:filename>")
     def index(filename):
