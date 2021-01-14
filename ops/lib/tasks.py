@@ -1,5 +1,3 @@
-#  import contextlib
-#  import os
 import sys
 from pathlib import Path
 
@@ -24,17 +22,6 @@ def warn(message):
 
 def alert(message):
     econsole.print(f"### ERROR: {message}", style="alert")
-
-
-#  @contextlib.contextmanager
-#  def cd(directory):
-#      """Temporarily change directory."""
-#      savedir = os.getcwd()
-#      os.chdir(os.path.expanduser(directory))
-#      try:
-#          yield
-#      finally:
-#          os.chdir(savedir)
 
 
 def run(ctx, cmd):
