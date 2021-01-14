@@ -1,8 +1,22 @@
 # Veto
 
-This app helps users in a group select from a list of choices. It was developed
-on a Linux operating system for deployment to Heroku. The following notes may
-only be useful once someone has already setup the Heroku infrastructure.
+This app helps users in a group select from a list of mutually exclusive
+choices while minimizing conflict. Setup and visit the web site itself to get a
+better idea of its purpose.
+
+This is a portfolio project which should help me demonstrate my web development
+skills to a potential employer. It was developed in a Linux environment, and
+for deployment to Heroku.
+
+The following notes are probably insufficient to completely understand the
+project since I developed them in isolation. My hope is that there are at least
+enough clues for an experienced developer to get the things working. I welcome
+feedback.
+
+## Technologies
+
+The app was built using Python and Flask for the server, and React for the
+client.
 
 ## Setting Up a Development Environment
 
@@ -64,6 +78,8 @@ only be useful once someone has already setup the Heroku infrastructure.
   ```
 
 ## Setting Up a Production Environment
+
+- Setup Heroku. See their documentation.
 
 - Setup environment variables:
 
