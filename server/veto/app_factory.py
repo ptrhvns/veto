@@ -21,7 +21,7 @@ def create_app():
         SECRET_KEY=os.getenv("SECRET_KEY", "devkey"),
     )
 
-    @app.route("/api/signup", methods=("POST"))
+    @app.route("/api/signup", methods=("GET", "POST"))
     def signup():
         return {"msg": "This has not been implemented yet."}
 
