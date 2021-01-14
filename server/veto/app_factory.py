@@ -2,13 +2,13 @@ import os
 import os.path
 from pathlib import Path
 
-from flask import Flask, send_from_directory
+from flask import Flask, safe_join, send_from_directory
 
 CLIENT_DIR = str(Path(__file__).resolve().parent.parent.parent / "client" / "build")
 
 
 def is_client_asset(filename):
-    return filename != "" and os.path.exists(os.path.join(CLIENT_DIR, filename))
+    return filename != "" and os.path.exists(safe_join(CLIENT_DIR, filename))
 
 
 def create_app():
