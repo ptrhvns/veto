@@ -77,6 +77,31 @@ client.
   flask run
   ```
 
+## Running Tests
+
+### Server
+
+- Install server package in *editable* mode:
+
+  ```sh
+  cd server
+  pip install -e .
+  ```
+
+- Run tests (see the plugins in `requirements.development.txt` for more options):
+
+  ```sh
+  pytest --cov-branch --cov=veto --no-cov-on-fail
+  ```
+
+- View detailed test coverage report:
+
+  ```sh
+  # Pick a path to output test coverage report.
+  coverage html -d ${PATH}
+  # Open path with a browser.
+  ```
+
 ## Setting Up a Production Environment
 
 - Setup Heroku. See their documentation.
