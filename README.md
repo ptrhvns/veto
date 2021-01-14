@@ -1,7 +1,7 @@
 # Veto
 
-This app helps users in a group select from a list of mutually exclusive
-choices while minimizing conflict. Setup and visit the web site itself to get a
+This web app helps users in a group select from a list of mutually exclusive
+choices while minimizing conflict. Setup and visit the web app itself to get a
 better idea of its purpose.
 
 This is a portfolio project which should help me demonstrate my web development
