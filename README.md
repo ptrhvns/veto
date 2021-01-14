@@ -10,7 +10,7 @@ for deployment to Heroku.
 
 The following notes are probably insufficient to completely understand the
 project since I developed them in isolation. My hope is that there are at least
-enough clues for an experienced developer to get the things working. I welcome
+enough clues for an experienced developer to get things working. I welcome
 feedback.
 
 ## Technologies
