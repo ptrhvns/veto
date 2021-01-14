@@ -11,7 +11,7 @@ def is_client_asset(filename):
     return filename != "" and os.path.exists(safe_join(CLIENT_DIR, filename))
 
 
-def create_app():
+def create_app(config=None):
     # Rename the static folder to prevent those routes from interferring with
     # client routing. If a static folder becomes necessary in the future,
     # routing (e.g. client handling 404s) will have to be rethought.
@@ -20,6 +20,9 @@ def create_app():
     app.config.from_mapping(
         SECRET_KEY=os.getenv("SECRET_KEY", "devkey"),
     )
+
+    if config:
+        app.config.from_mapping(config)
 
     @app.route("/api/signup", methods=("GET", "POST"))
     def signup():
