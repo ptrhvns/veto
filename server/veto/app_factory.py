@@ -12,8 +12,8 @@ def is_client_asset(filename):
 
 
 def create_app():
-    # Rename the static folder to something unused to prevent those routes from
-    # interferring with client routing.
+    # Rename the static folder to prevent those routes from interferring with
+    # client routing.
     app = Flask(__name__, static_folder="unused")
 
     app.config.from_mapping(
