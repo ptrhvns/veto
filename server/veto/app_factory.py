@@ -7,8 +7,8 @@ from flask import Flask, send_from_directory
 CLIENT_DIR = str(Path(__file__).resolve().parent.parent.parent / "client" / "build")
 
 
-def is_client_asset(path):
-    return path != "" and os.path.exists(os.path.join(CLIENT_DIR, path))
+def is_client_asset(filename):
+    return filename != "" and os.path.exists(os.path.join(CLIENT_DIR, filename))
 
 
 def create_app():
