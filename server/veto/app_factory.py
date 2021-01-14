@@ -28,7 +28,7 @@ def create_app():
     # This route should be defined last. It's only used with the client
     # production build (i.e the client/build directory exists). It lets the
     # client handle routing not otherwise specified by the server.
-    @app.route("/", defaults={"path": ""})
+    @app.route("/", defaults={"filename": ""})
     @app.route("/<path:filename>")
     def index(filename):
         f = filename if is_client_asset(filename) else "index.html"
