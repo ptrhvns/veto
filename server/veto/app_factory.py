@@ -21,6 +21,10 @@ def create_app():
         SECRET_KEY=os.getenv("SECRET_KEY", "devkey"),
     )
 
+    @app.route("/api/signup", methods=("POST"))
+    def signup():
+        return {"msg": "This has not been implemented yet."}
+
     # This route should be defined last. It's only used with the client
     # production build (i.e the client/build directory exists). It lets the
     # client handle routing not otherwise specified by the server.
