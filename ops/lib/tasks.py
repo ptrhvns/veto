@@ -24,9 +24,9 @@ def alert(message):
     econsole.print(f"### ERROR: {message}", style="alert")
 
 
-def run(ctx, cmd):
-    result = ctx.run(cmd, warn=True)
-    if result.failed:
+def run(ctx, cmd, **kwargs):
+    result = ctx.run(cmd, warn=True, **kwargs)
+    if result and result.failed:
         alert(f"Command failed: {cmd}")
         sys.exit(1)
 
@@ -58,3 +58,10 @@ def release(c):
 
     notify("Pushing Git repo to heroku remote")
     run(c, "git push heroku main")
+
+
+@task(name="test:server")
+def test_server(c):
+    """Run server tests"""
+    notify("Running server tests")
+    run(c, "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail", pty=True)
