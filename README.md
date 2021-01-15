@@ -91,7 +91,7 @@ client.
 - Run tests (see the plugins in `requirements.development.txt` for more options):
 
   ```sh
-  pytest --cov-branch --cov=veto --no-cov-on-fail
+  invoke -r ops/lib test:server
   ```
 
 - View detailed test coverage report:
