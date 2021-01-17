@@ -4,14 +4,12 @@ This web app helps users in a group select from a list of mutually exclusive
 choices while minimizing conflict. Setup and visit the web app itself to get a
 better idea of its purpose.
 
-This is a portfolio project which should help me demonstrate my web development
-skills to a potential employer. It was developed in a Linux environment, and
-for deployment to Heroku.
+This is a portfolio project built to help me demonstrate my web development
+skills. It was developed in a Linux environment, and for deployment to Heroku.
 
 The following notes are probably insufficient to completely understand the
-project since I developed them in isolation. My hope is that there are at least
-enough clues for an experienced developer to get things working. I welcome
-feedback.
+project, but my hope is that there are at least enough clues for an experienced
+developer to get things working. I welcome feedback.
 
 ## Technologies
 
