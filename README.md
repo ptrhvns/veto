@@ -109,8 +109,16 @@ client.
   ```sh
   heroku config:set FLASK_APP=server.app:app
   heroku config:set FLASK_ENV=production
+  heroku config:set SENTRY_ACTIVE=yes
+
   # Set a specific key, or generate a random one like this:
   heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
+
+  # Use appropriate value.
+  heroku config:set SENTRY_DSN=...
+
+  # Use appropriate value.
+  heroku config:set SENTRY_TRACES_SAMPLE_RATE=...
   ```
 
 ## Releasing to Production
