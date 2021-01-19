@@ -3,6 +3,6 @@ gunicorn==20.0.4
 invoke==1.5.0
 python-dateutil==2.8.1
 python-dotenv==0.15.0
-sentry-sdk==0.19.5
+sentry-sdk[flask]==0.19.5
 simplejson==3.17.2
 
