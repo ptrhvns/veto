@@ -11,10 +11,12 @@ The following notes are probably insufficient to completely understand the
 project, but my hope is that there are at least enough clues for an experienced
 developer to get things working. I welcome feedback.
 
-## Technologies
+## Architecture
 
-The app was built using Python and Flask for the server, and React for the
-client.
+* The server was built with Python and Flask.
+* The client was built with React.
+* Heroku is used for production deployment.
+* Sentry is used to track errors and performance.
 
 ## Setting Up a Development Environment
 
