@@ -29,11 +29,6 @@ def create_app(config=None):
     def health():
         return {"msg": "OK"}
 
-    # FIXME remove after testing Sentry.
-    @app.route("/sentry")
-    def sentry():
-        return 1 / 0  # FIXME broken on purpose
-
     # This route should be defined last. It's only used with the client
     # production build (i.e the client/build directory exists). It lets the
     # client handle routing not otherwise specified by the server.
