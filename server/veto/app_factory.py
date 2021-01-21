@@ -13,9 +13,6 @@ def is_client_asset(filename):
 
 
 def create_app(config=None):
-    # Rename the static folder to prevent those routes from interferring with
-    # client routing. If a static folder becomes necessary in the future,
-    # routing (e.g. client handling 404s) will have to be rethought.
     app = Flask(__name__, static_folder="unused")
 
     app.config.from_mapping(
@@ -27,24 +24,26 @@ def create_app(config=None):
 
     @app.route("/api/health")
     def health():
+        app.logger.info("/api/health called")
         return {"msg": "OK"}
 
-    # This route should be defined last. It's only used with the client
-    # production build (i.e the client/build directory exists). It lets the
-    # client handle routing not otherwise specified by the server.
-    @app.route("/", defaults={"filename": ""})
     @app.route("/<path:filename>")
-    def index(filename):
+    def client_asset(filename):
         f = filename if is_client_asset(filename) else "index.html"
         return send_from_directory(CLIENT_DIR, f)
 
+    @app.route("/")
+    def root():
+        return send_from_directory(CLIENT_DIR, "index.html")
+
     @app.errorhandler(werkzeug.exceptions.InternalServerError)
     def internal_server_error(e):
+        msg = "We couldn't fulfill your request due to an unexpected error."
+        code = 500
+
         if request.accept_mimetypes.accept_html:
-            return render_template("errors/500.html"), 500
+            return render_template("errors/500.jinja", msg=msg), code
         else:
-            return {
-                "msg": "We couldn't fulfill your request due to an unexpected error."
-            }, 500
+            return {"msg": msg}, code
 
     return app
