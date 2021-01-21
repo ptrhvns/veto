@@ -24,7 +24,6 @@ def create_app(config=None):
 
     @app.route("/api/health")
     def health():
-        app.logger.info("/api/health called")
         return {"msg": "OK"}
 
     @app.route("/<path:filename>")
