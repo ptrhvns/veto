@@ -40,10 +40,11 @@ def create_app(config=None):
 
     @app.errorhandler(werkzeug.exceptions.InternalServerError)
     def internal_server_error(e):
-        if request.accept_mimetypes.accept_json:
+        if request.accept_mimetypes.accept_html:
+            return render_template("errors/500.html"), 500
+        else:
             return {
                 "msg": "We couldn't fulfill your request due to an unexpected error."
             }, 500
-        return render_template("errors/500.html")
 
     return app
