@@ -1,0 +1,2 @@
+client: cd client && PORT=3000 npm start
+server: flask run
