@@ -15,7 +15,7 @@ developer to get things working. I welcome feedback.
 
 * The server was built with Python and Flask.
 * The client was built with React.
-* Heroku is used for production deployment.
+* Heroku is used for production deployments.
 * Sentry is used to track errors and performance.
 
 ## Setting Up a Development Environment
