@@ -59,29 +59,24 @@ developer to get things working. I welcome feedback.
 
   ```sh
   cp .env.example .env
-  # Edit values in .env.
-  # SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
+  # Edit values in .env. You can generate SECRET_KEY with:
+  # python -c 'import os; print(os.urandom(24).hex())'
   ```
 
-- When working in development, start both the client app and the server app.
-  The client app will proxy API calls to the server. (In production, only the
-  server will be started. The client will be built as a set of static assets,
-  and served by the server when visiting the root route):
+- Start client and server apps. The client app will proxy API calls to the
+  server. (In production, only the server will be started. The client will be
+  built as a set of static assets, and served by the server when visiting the
+  root route):
 
   ```sh
-  # In one terminal.
-  cd client
-  npm start
-
-  # In another terminal.
-  flask run
+  honcho -f Procfile.development start
   ```
 
 ## Running Tests
 
 ### Server
 
-- Install server package in *editable* mode:
+- Install server package in editable mode:
 
   ```sh
   cd server
