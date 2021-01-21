@@ -3,7 +3,7 @@ import os.path
 from pathlib import Path
 
 import werkzeug
-from flask import Flask, safe_join, send_from_directory
+from flask import Flask, render_template, request, safe_join, send_from_directory
 
 CLIENT_DIR = str(Path(__file__).resolve().parent.parent.parent / "client" / "build")
 
@@ -40,8 +40,10 @@ def create_app(config=None):
 
     @app.errorhandler(werkzeug.exceptions.InternalServerError)
     def internal_server_error(e):
-        return {
-            "msg": "We couldn't fulfill your request due to an unexpected error."
-        }, 500
+        if request.accept_mimetypes.accept_json:
+            return {
+                "msg": "We couldn't fulfill your request due to an unexpected error."
+            }, 500
+        return render_template("errors/500.html")
 
     return app
