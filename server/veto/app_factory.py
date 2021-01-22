@@ -1,23 +1,26 @@
 import os
 import os.path
-from pathlib import Path
 
 import werkzeug
-from flask import Flask, render_template, request, safe_join, send_from_directory
+from flask import (
+    Flask,
+    current_app,
+    render_template,
+    request,
+    safe_join,
+    send_from_directory,
+)
+from veto.app_config import AppConfig
 
-CLIENT_DIR = str(Path(__file__).resolve().parent.parent.parent / "client" / "build")
 
-
-def is_client_asset(filename):
-    return filename != "" and os.path.exists(safe_join(CLIENT_DIR, filename))
+def is_client_asset(app, filename):
+    path = safe_join(app.config["CLIENT_DIR"], filename)
+    return filename != "" and os.path.exists(path)
 
 
 def create_app(config=None):
     app = Flask(__name__, static_folder="unused")
-
-    app.config.from_mapping(
-        SECRET_KEY=os.getenv("SECRET_KEY", "devkey"),
-    )
+    app.config.from_object(AppConfig)
 
     if config:
         app.config.from_mapping(config)
@@ -28,12 +31,12 @@ def create_app(config=None):
 
     @app.route("/<path:filename>")
     def client_asset(filename):
-        f = filename if is_client_asset(filename) else "index.html"
-        return send_from_directory(CLIENT_DIR, f)
+        f = filename if is_client_asset(current_app, filename) else "index.html"
+        return send_from_directory(app.config["CLIENT_DIR"], f)
 
     @app.route("/")
     def root():
-        return send_from_directory(CLIENT_DIR, "index.html")
+        return send_from_directory(app.config["CLIENT_DIR"], "index.html")
 
     @app.errorhandler(werkzeug.exceptions.InternalServerError)
     def internal_server_error(e):
