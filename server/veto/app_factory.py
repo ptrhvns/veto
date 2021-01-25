@@ -20,7 +20,7 @@ def is_client_asset(app, filename):
 
 def create_app(config=None):
     app = Flask(__name__, static_folder="unused")
-    app.config.from_object(AppConfig)
+    app.config.from_object(AppConfig())
 
     if config:
         app.config.from_mapping(config)
