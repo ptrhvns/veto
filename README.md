@@ -1,20 +1,15 @@
 # Veto
 
 This web app helps users in a group select from a list of mutually exclusive
-choices while minimizing conflict. Setup and visit the web app itself to get a
-better idea of its purpose.
-
-This is a portfolio project built to help me demonstrate my web development
-skills. It was developed in a Linux environment, and for deployment to Heroku.
-
-The following notes are probably insufficient to completely understand the
-project, but my hope is that there are at least enough clues for an experienced
-developer to get things working. I welcome feedback.
+choices while also helping to minimizing conflict. The following notes are
+probably insufficient completely understand the project, but my hope is that
+there are at least enough clues to get things working.
 
 ## Architecture
 
-* The server was built with Python and Flask.
-* The client was built with React.
+* The web app is broken into a client and a server.
+* The server is built with Python and Flask.
+* The client is built with React (via create-react-app).
 * Heroku is used for production deployments.
 * Sentry is used to track errors and performance.
 
@@ -59,8 +54,13 @@ developer to get things working. I welcome feedback.
 
   ```sh
   cp .env.example .env
-  # Edit values in .env. You can generate SECRET_KEY with:
-  # python -c 'import os; print(os.urandom(24).hex())'
+  $EDITOR .env
+  ```
+
+  You can generate a SECRET_KEY with:
+
+  ```sh
+  python -c 'import os; print(os.urandom(24).hex())'
   ```
 
 - Start client and server apps. The client app will proxy API calls to the
@@ -89,11 +89,11 @@ developer to get things working. I welcome feedback.
   invoke -r ops/lib test:server
   ```
 
-- View detailed test coverage report:
+- View a detailed test coverage report:
 
   ```sh
   # Pick a path to output test coverage report.
-  coverage html -d ${PATH}
+  coverage html -d $PATH
   # Open path with a browser.
   ```
 
@@ -112,10 +112,10 @@ developer to get things working. I welcome feedback.
   heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
 
   # Use appropriate value.
-  heroku config:set SENTRY_DSN=...
+  heroku config:set SENTRY_DSN=${SENTRY_DSN}
 
   # Use appropriate value.
-  heroku config:set SENTRY_TRACES_SAMPLE_RATE=...
+  heroku config:set SENTRY_TRACES_SAMPLE_RATE=${SENTRY_TRACES_SAMPLE_RATE}
   ```
 
 ## Releasing to Production
