@@ -32,7 +32,7 @@ def run(ctx, cmd, **kwargs):
 
 
 @task
-def release(c):
+def release(ctx):
     """Build and release the app."""
 
     root_directory = str(Path(__file__).resolve().parent.parent.parent)
@@ -43,25 +43,30 @@ def release(c):
         sys.exit(1)
 
     notify("Building client")
-    with c.cd("client"):
-        run(c, "npm run build")
+    with ctx.cd("client"):
+        run(ctx, "npm run build")
 
     if repo.is_dirty():
         notify("Adding new client build assets to Git repo")
-        run(c, "git add client/build")
-        run(c, "git commit -m 'Add new client build assets'")
+        run(ctx, "git add client/build")
+        run(ctx, "git commit -m 'Add new client build assets'")
     else:
         notify("No change detected in client build assets")
 
     notify("Pushing Git repo to origin remote")
-    run(c, "git push origin main")
+    run(ctx, "git push origin main")
 
     notify("Pushing Git repo to heroku remote")
-    run(c, "git push heroku main")
+    run(ctx, "git push heroku main")
 
 
 @task(name="test:server")
-def test_server(c):
+def test_server(ctx):
     """Run server tests"""
     notify("Running server tests")
-    run(c, "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail", pty=True)
+    run(
+        ctx,
+        # "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail --numprocesses=auto ",
+        "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail",
+        pty=True,
+    )
