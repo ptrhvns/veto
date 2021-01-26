@@ -1,13 +1,13 @@
 # Veto
 
-This web app helps users in a group select from a list of mutually exclusive
+This website helps users in a group select from a list of mutually exclusive
 choices while also helping to minimizing conflict. The following notes are
 probably insufficient to completely understand the project, but they are
 hopefully enough to get started.
 
 ## Architecture
 
-* The web app is broken into a client and a server.
+* The website is broken into a client and a server.
 * The server is built with Python and Flask.
 * The client is built with React (via create-react-app).
 * Heroku is used for production deployments.
@@ -63,10 +63,9 @@ hopefully enough to get started.
   python -c 'import os; print(os.urandom(24).hex())'
   ```
 
-- Start client and server apps. The client app will proxy API calls to the
-  server. (In production, only the server will be started. The client will be
-  built as a set of static assets, and served by the server when visiting the
-  root route):
+- Start client and server. The client will proxy API calls to the server. (In
+  production, only the server will be started. The client will be built as a
+  set of static assets, and served by the server when visiting the root route):
 
   ```sh
   honcho -f Procfile.development start
@@ -120,7 +119,7 @@ hopefully enough to get started.
 
 ## Releasing to Production
 
-- Build and deploy the production app to Heroku:
+- Build and deploy to production on Heroku:
 
   ```sh
   invoke -r ops/lib release
