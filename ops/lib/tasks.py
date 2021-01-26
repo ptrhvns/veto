@@ -66,6 +66,7 @@ def test_server(ctx):
     notify("Running server tests")
     run(
         ctx,
+        # TODO Switch to multi-process when single process > multi-process run time.
         # "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail --numprocesses=auto ",
         "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail",
         pty=True,
