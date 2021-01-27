@@ -1,17 +1,17 @@
 # Veto
 
 This website helps users in a group select from a list of mutually exclusive
-choices while also helping to minimizing conflict. The following notes are
-probably insufficient to completely understand the project, but they are
-hopefully enough to get started.
+choices while also helping to minimizing conflict. The following notes may not
+be sufficient to completely understand the project, but they are hopefully
+enough to get started.
 
 ## Architecture
 
-* The website is broken into a client and a server.
+* The website is split into a client and a server.
 * The server is built with Python and Flask.
 * The client is built with React (via create-react-app).
 * Heroku is used for production deployments.
-* Sentry is used to track errors and performance.
+* Sentry is used to track errors.
 
 ## Setting Up a Development Environment
 
@@ -82,7 +82,7 @@ hopefully enough to get started.
   pip install -e .
   ```
 
-- Run tests (see the plugins in `requirements.development.txt` for more options):
+- Run tests (see the `pytest` plugins in `requirements.development.txt` for options):
 
   ```sh
   invoke -r ops/lib test:server
@@ -91,9 +91,7 @@ hopefully enough to get started.
 - View a detailed test coverage report:
 
   ```sh
-  # Pick a path to output test coverage report.
   coverage html -d $PATH
-  # Open path with a browser.
   ```
 
 ## Setting Up a Production Environment
@@ -110,10 +108,10 @@ hopefully enough to get started.
   # Set a specific key, or generate a random one like this:
   heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
 
-  # Use appropriate value.
+  # Use an appropriate value.
   heroku config:set SENTRY_DSN=${SENTRY_DSN}
 
-  # Use appropriate value.
+  # Use an appropriate value.
   heroku config:set SENTRY_TRACES_SAMPLE_RATE=${SENTRY_TRACES_SAMPLE_RATE}
   ```
 
