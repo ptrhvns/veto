@@ -10,7 +10,7 @@ from flask import (
     safe_join,
     send_from_directory,
 )
-from veto.app_config import AppConfig
+from .app_config import AppConfig
 
 
 def is_client_asset(app, filename):
