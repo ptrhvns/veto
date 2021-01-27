@@ -1,5 +1,5 @@
-import werkzeug
 from flask import Flask
+from werkzeug.exceptions import InternalServerError
 
 from .app_config import AppConfig
 from .error_handlers import internal_server_error
@@ -19,9 +19,7 @@ def register_routes(app):
 
 
 def register_error_handlers(app):
-    app.register_error_handler(
-        werkzeug.exceptions.InternalServerError, internal_server_error
-    )
+    app.register_error_handler(InternalServerError, internal_server_error)
 
 
 def create_app(config=None):
