@@ -128,6 +128,7 @@ enough to get started.
 - Build project and deploy it to production on Heroku:
 
   ```sh
+  # Assumes git remotes origin and heroku exist.
   invoke -r ops/lib release
   ```
 
