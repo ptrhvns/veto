@@ -1,52 +1,25 @@
-import os
-import os.path
-
 import werkzeug
-from flask import (
-    Flask,
-    current_app,
-    render_template,
-    request,
-    safe_join,
-    send_from_directory,
-)
+from flask import Flask
 
 from .app_config import AppConfig
-
-
-def is_client_asset(app, filename):
-    path = safe_join(app.config["CLIENT_DIR"], filename)
-    return filename != "" and os.path.exists(path)
+from .error_handlers import internal_server_error
+from .views import client_asset, health, root
 
 
 def create_app(config=None):
     app = Flask(__name__, static_folder="unused")
+
     app.config.from_object(AppConfig())
 
     if config:
         app.config.from_mapping(config)
 
-    @app.route("/api/health")
-    def health():
-        return {"msg": "OK"}
+    app.add_url_rule("/api/health", "health", health)
+    app.add_url_rule("/<path:filename>", "client_asset", client_asset)
+    app.add_url_rule("/", "root", root)
 
-    @app.route("/<path:filename>")
-    def client_asset(filename):
-        f = filename if is_client_asset(current_app, filename) else "index.html"
-        return send_from_directory(app.config["CLIENT_DIR"], f)
-
-    @app.route("/")
-    def root():
-        return send_from_directory(app.config["CLIENT_DIR"], "index.html")
-
-    @app.errorhandler(werkzeug.exceptions.InternalServerError)
-    def internal_server_error(e):
-        msg = "We couldn't fulfill your request due to an unexpected error."
-        code = 500
-
-        if request.accept_mimetypes.accept_html:
-            return render_template("errors/500.jinja", msg=msg), code
-        else:
-            return {"msg": msg}, code
+    app.register_error_handler(
+        werkzeug.exceptions.InternalServerError, internal_server_error
+    )
 
     return app
