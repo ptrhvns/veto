@@ -130,3 +130,10 @@ enough to get started.
   ```sh
   invoke -r ops/lib release
   ```
+
+- Verify that website is up and running:
+
+  ```sh
+  heroku logs
+  heroku open
+  ```
