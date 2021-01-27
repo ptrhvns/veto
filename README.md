@@ -131,7 +131,7 @@ enough to get started.
   invoke -r ops/lib release
   ```
 
-- Verify that website is up and running:
+- Verify that production website is up and running:
 
   ```sh
   heroku logs
