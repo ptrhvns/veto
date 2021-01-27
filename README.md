@@ -117,7 +117,15 @@ enough to get started.
 
 ## Releasing to Production
 
-- Build and deploy to production on Heroku:
+- Manually test that website works locally using Heroku tools:
+
+  ```sh
+  heroku local
+  ```
+
+- Run full test suite (see enclosed instructions).
+
+- Build project and deploy it to production on Heroku:
 
   ```sh
   invoke -r ops/lib release
