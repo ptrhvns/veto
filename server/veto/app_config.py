@@ -7,6 +7,11 @@ class AppConfig:
         return value.lower() in ["1", "t", "true", "yes"]
 
     CLIENT_DIR = str(Path(__file__).resolve().parent.parent.parent / "client" / "build")
+
+    @property
+    def FLASK_DEBUG(self):
+        return self.as_bool(os.getenv("FLASK_DEBUG", default="False"))
+
     SECRET_KEY = os.getenv("SECRET_KEY", "facefeed")
 
     @property
