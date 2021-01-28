@@ -123,8 +123,6 @@ enough to get started.
   heroku local
   ```
 
-- Run full test suite (see enclosed instructions).
-
 - Build project and deploy it to production on Heroku:
 
   ```sh
