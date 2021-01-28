@@ -7,7 +7,6 @@ from rich.console import Console
 from rich.theme import Theme
 
 theme = Theme({"notify": "cyan", "warn": "yellow", "alert": "bold red"})
-
 console = Console(theme=theme, highlight=False)
 econsole = Console(file=sys.stderr, highlight=False, theme=theme)
 
@@ -24,23 +23,39 @@ def alert(message):
     econsole.print(f"### ERROR: {message}", style="alert")
 
 
+def die(message):
+    alert(message)
+    sys.exit(1)
+
+
 def run(ctx, cmd, **kwargs):
     result = ctx.run(cmd, warn=True, **kwargs)
-    if result and result.failed:
-        alert(f"Command failed: {cmd}")
-        sys.exit(1)
+    if result.failed:
+        die(f"Command failed: {cmd}")
 
 
-@task
+@task(name="test:server")
+def test_server(ctx):
+    """Run server tests"""
+    notify("Running server tests")
+    with ctx.cd("server"):
+        run(
+            ctx,
+            # TODO Switch to multi-process when run time would be improved.
+            # --numprocesses=auto
+            "pytest --cov-branch --cov=veto --exitfirst --no-cov-on-fail",
+            pty=True,
+        )
+
+
+@task(test_server)
 def release(ctx):
-    """Build and release the app."""
-
+    """Build and release the app"""
     root_directory = str(Path(__file__).resolve().parent.parent.parent)
     repo = Repo(root_directory)
 
     if repo.is_dirty():
-        alert("Git repo is dirty")
-        sys.exit(1)
+        die("Git repo is dirty")
 
     notify("Building client")
     with ctx.cd("client"):
@@ -58,16 +73,3 @@ def release(ctx):
 
     notify("Pushing Git repo to heroku remote")
     run(ctx, "git push heroku main")
-
-
-@task(name="test:server")
-def test_server(ctx):
-    """Run server tests"""
-    notify("Running server tests")
-    run(
-        ctx,
-        # TODO Switch to multi-process when single process > multi-process run time.
-        # "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail --numprocesses=auto ",
-        "cd server && pytest --cov-branch --cov=veto --no-cov-on-fail",
-        pty=True,
-    )
