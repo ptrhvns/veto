@@ -12,7 +12,7 @@ def configure_app(app, config=None):
         app.config.from_mapping(config)
 
 
-def register_routes(app):
+def add_url_rules(app):
     app.add_url_rule("/api/health", "health", views.health)
     app.add_url_rule("/<path:filename>", "client_asset", views.client_asset)
     app.add_url_rule("/", "root", views.root)
@@ -25,6 +25,6 @@ def register_error_handlers(app):
 def create_app(config=None):
     app = Flask(__name__, static_folder="unused")
     configure_app(app, config)
-    register_routes(app)
+    add_url_rules(app)
     register_error_handlers(app)
     return app
