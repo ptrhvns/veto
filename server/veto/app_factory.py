@@ -1,9 +1,9 @@
 from flask import Flask
 from werkzeug.exceptions import InternalServerError
 
+from . import views
 from .app_config import AppConfig
 from .error_handlers import internal_server_error
-from .views import client_asset, health, root
 
 
 def configure_app(app, config=None):
@@ -13,9 +13,9 @@ def configure_app(app, config=None):
 
 
 def register_routes(app):
-    app.add_url_rule("/api/health", "health", health)
-    app.add_url_rule("/<path:filename>", "client_asset", client_asset)
-    app.add_url_rule("/", "root", root)
+    app.add_url_rule("/api/health", "health", views.health)
+    app.add_url_rule("/<path:filename>", "client_asset", views.client_asset)
+    app.add_url_rule("/", "root", views.root)
 
 
 def register_error_handlers(app):
