@@ -6,7 +6,7 @@ from .app_config import AppConfig
 from .error_handlers import internal_server_error
 
 
-def configure_app(app, config=None):
+def config_app(app, config=None):
     app.config.from_object(AppConfig())
     if config:
         app.config.from_mapping(config)
@@ -26,7 +26,7 @@ def create_app(config=None):
     # Sideline static_folder to prevent route conflicts with client.
     app = Flask("veto", static_folder="unused")
 
-    configure_app(app, config)
+    config_app(app, config)
     add_url_rules(app)
     register_error_handlers(app)
     return app
