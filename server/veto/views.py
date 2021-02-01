@@ -9,7 +9,7 @@ def client_asset(filename):
 
 
 def health():
-    return {"msg": "OK"}
+    return {"status": "OK"}
 
 
 def root():
