@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_talisman import Talisman
 from werkzeug.exceptions import InternalServerError
 
 from . import views
@@ -10,6 +11,10 @@ def config_app(app, config=None):
     app.config.from_object(AppConfig())
     if config:
         app.config.from_mapping(config)
+
+
+def init_app_extensions(app):
+    Talisman(app)
 
 
 def add_url_rules(app):
@@ -27,6 +32,7 @@ def create_app(config=None):
     app = Flask("veto", static_folder="unused")
 
     config_app(app, config)
+    init_app_extensions(app)
     add_url_rules(app)
     register_error_handlers(app)
     return app

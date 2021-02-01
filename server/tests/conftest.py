@@ -4,7 +4,7 @@ from veto.app_factory import create_app
 
 @pytest.fixture
 def app():
-    return create_app({"TESTING": True})
+    return create_app({"DEBUG": True, "TESTING": True})
 
 
 @pytest.fixture
