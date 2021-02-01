@@ -23,7 +23,9 @@ def register_error_handlers(app):
 
 
 def create_app(config=None):
+    # Sideline static_folder to prevent route conflicts with client.
     app = Flask(__name__, static_folder="unused")
+
     configure_app(app, config)
     add_url_rules(app)
     register_error_handlers(app)
