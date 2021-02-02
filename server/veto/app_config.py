@@ -13,3 +13,4 @@ class AppConfig:
         return self.as_bool(os.getenv("FLASK_DEBUG", default="False"))
 
     SECRET_KEY = os.getenv("SECRET_KEY", "facefeed")
+    SESSION_COOKIE_SAMESITE = "Lax"
