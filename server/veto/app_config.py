@@ -13,7 +13,3 @@ class AppConfig:
         return self.as_bool(os.getenv("FLASK_DEBUG", default="False"))
 
     SECRET_KEY = os.getenv("SECRET_KEY", "facefeed")
-
-    @property
-    def SESSION_COOKIE_HTTPONLY(self):
-        return self.as_bool(os.getenv("SESSION_COOKIE_HTTPONLY", default="True"))
