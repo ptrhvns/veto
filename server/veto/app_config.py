@@ -14,4 +14,6 @@ class AppConfig:
 
     # SECRET_KEY must be set as it's used by app.
     SECRET_KEY = os.environ["SECRET_KEY"]
+
+    # Some SESSION_* configs are handled by the flask-talisman package.
     SESSION_COOKIE_SAMESITE = "Lax"
