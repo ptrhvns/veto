@@ -10,7 +10,7 @@ class AppConfig:
 
     @property
     def FLASK_DEBUG(self):
-        return self.as_bool(os.getenv("FLASK_DEBUG", default="False"))
+        return self.as_bool(os.environ.get("FLASK_DEBUG", "False"))
 
     # SECRET_KEY must be set as it's used by app.
     SECRET_KEY = os.environ["SECRET_KEY"]
