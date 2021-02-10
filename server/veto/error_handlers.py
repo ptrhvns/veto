@@ -1,11 +1,13 @@
+from http import HTTPStatus
+
 from flask import render_template, request
 
 
 def internal_server_error(e):
-    msg = "We couldn't fulfill your request due to an unexpected error."
-    code = 500
+    msg = "Your request caused an unexpected error."
+    code = HTTPStatus.INTERNAL_SERVER_ERROR.value
 
     if request.accept_mimetypes.accept_html:
-        return render_template("errors/500.jinja", msg=msg), code
+        return render_template(f"errors/{code}.jinja", msg=msg), code
     else:
         return {"msg": msg}, code
