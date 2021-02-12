@@ -3,4 +3,5 @@
 .python-version
 __pycache__
 server/.coverage
+server/coverage
 tags
