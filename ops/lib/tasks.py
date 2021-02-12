@@ -48,6 +48,14 @@ def test_server(ctx):
         )
 
 
+@task(name="test:server:coverage")
+def test_server_coverage(ctx):
+    """Create server test coverage report"""
+    notify("Creating server test coverage report")
+    with ctx.cd("server"):
+        run(ctx, "coverage html --directory coverage", pty=True)
+
+
 @task(test_server)
 def release(ctx):
     """Build and release the app"""

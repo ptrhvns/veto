@@ -1,4 +1,5 @@
 [run]
 omit =
+    veto/__init__.py
     veto/app_config.py
     veto/sentry.py
