@@ -101,6 +101,10 @@ enough to get started.
 - Setup environment variables:
 
   ```sh
+  # Use an appropriate value. Assumes only one domain and HTTPS.
+  # For example: https://$(heroku domains --json | jq -r '.[0].hostname')
+  heroku config:set CSRF_TARGET_ORIGIN=${CSRF_TARGET_ORIGIN}
+
   heroku config:set FLASK_APP=server.app:app
   heroku config:set FLASK_ENV=production
   heroku config:set SENTRY_ENABLED=yes
