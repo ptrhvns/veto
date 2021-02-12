@@ -5,6 +5,7 @@ from flask import g, session
 from itsdangerous import URLSafeTimedSerializer
 from veto.csrf_protection import (
     CSRF_SAFE_HTTP_METHODS,
+    CSRF_TOKEN_HEADER_NAME,
     CSRF_TOKEN_MAX_AGE,
     CSRF_TOKEN_NAME,
     generate_csrf_token,
@@ -106,8 +107,7 @@ def test_is_invalid_csrf_token(app_fn):
         session[CSRF_TOKEN_NAME] = valid_csrf_token
         assert not is_invalid_csrf_token()
 
-    with app.test_request_context():
-        invalid_csrf_token = "invalid"
+    invalid_csrf_token = "invalid"
 
     with app.test_request_context(headers={CSRF_TOKEN_NAME: invalid_csrf_token}):
         session[CSRF_TOKEN_NAME] = valid_csrf_token
@@ -130,11 +130,12 @@ def test_is_invalid_csrf_token(app_fn):
 
 
 def test_protect_request_from_csrf(app_fn):
-    valid_origin = "http://example.com:80"
     invalid_origin = "http://evil.xyz:666"
-    unsafe_method = "POST"
     path = "/"
-    app = app_fn({"CSRF_TARGET_ORIGIN": valid_origin})
+    secret_key = "testsecret"
+    unsafe_method = "POST"
+    valid_origin = "http://example.com:80"
+    app = app_fn({"CSRF_TARGET_ORIGIN": valid_origin, "SECRET_KEY": secret_key})
 
     for method in CSRF_SAFE_HTTP_METHODS:
         with app.test_request_context(method=method):
@@ -162,3 +163,18 @@ def test_protect_request_from_csrf(app_fn):
         assert isinstance(json["msg"], str)
         assert json["error_info"] == "INVALID_CSRF_TOKEN"
         assert code == HTTPStatus.FORBIDDEN.value
+
+    with app.test_request_context():
+        valid_csrf_token = generate_csrf_token()
+
+    with app.test_request_context(
+        headers={
+            CSRF_TOKEN_HEADER_NAME: valid_csrf_token,
+            "Accept": "text/html",
+            "Origin": valid_origin,
+        },
+        method=unsafe_method,
+        path=path,
+    ):
+        session[CSRF_TOKEN_NAME] = valid_csrf_token
+        assert protect_request_from_csrf() is None
