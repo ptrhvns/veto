@@ -105,8 +105,9 @@ enough to get started.
   heroku config:set FLASK_ENV=production
   heroku config:set SENTRY_ENABLED=yes
 
-  # Set a specific key, or generate a random one like this:
-  heroku config:set SECRET_KEY=$(python -c 'import os; print(os.urandom(24).hex())')
+  # Use an appropriate value.
+  # For example: python -c 'import os; print(os.urandom(24).hex())'
+  heroku config:set SECRET_KEY=${SECRET_KEY}
 
   # Use an appropriate value.
   heroku config:set SENTRY_DSN=${SENTRY_DSN}
