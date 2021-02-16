@@ -27,12 +27,7 @@ def build_content_security_policy(app):
 
 
 def setup_app_extensions(app):
-    Talisman(
-        app,
-        content_security_policy=(
-            None if app.debug else build_content_security_policy(app)
-        ),
-    )
+    Talisman(app, content_security_policy=build_content_security_policy(app))
 
 
 def setup_app_callbacks(app):
