@@ -1,7 +1,7 @@
-import NotFound from './NotFound';
-import Welcome from './Welcome';
+import NotFound from './pages/NotFound';
+import Welcome from './pages/Welcome';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { buildTitle } from '../lib/utils';
+import { buildTitle } from './lib/utils';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function App() {
