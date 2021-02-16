@@ -12,9 +12,27 @@ def setup_app_config(app, config=None):
         app.config.from_mapping(config)
 
 
+def build_content_security_policy(app):
+    return {
+        "connect-src": "'self' data:",
+        "default-src": "'self' data:",
+        "font-src": "'self' data:",
+        "frame-src": "'self' data:",
+        "img-src": "'self' data:",
+        "media-src": "'self' data:",
+        "object-src": "'self' data:",
+        "script-src": "'self' data: 'unsafe-inline'",
+        "style-src": "'self' data: 'unsafe-inline'",
+    }
+
+
 def setup_app_extensions(app):
-    talisman_kwargs = {"content_security_policy": None} if app.debug else {}
-    Talisman(app, **talisman_kwargs)
+    Talisman(
+        app,
+        content_security_policy=(
+            None if app.debug else build_content_security_policy(app)
+        ),
+    )
 
 
 def setup_app_callbacks(app):
