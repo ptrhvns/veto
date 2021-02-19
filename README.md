@@ -73,6 +73,28 @@ enough to get started.
 
 ## Running Tests
 
+### All
+
+- Run all tests:
+
+  ```sh
+  invoke -r ops/lib test:all
+  ```
+
+### Client
+
+- Run client tests:
+
+  ```sh
+  invoke -r ops/lib test:client
+  ```
+
+- View client test coverage report:
+
+  ```sh
+  invoke -r ops/lib test:client:coverage
+  ```
+
 ### Server
 
 - Install server package in editable mode:
@@ -82,16 +104,17 @@ enough to get started.
   pip install -e .
   ```
 
-- Run tests (see the `pytest` plugins in `requirements.development.txt` for options):
+- Run server tests (see the `pytest` plugins in `requirements.development.txt` for options):
 
   ```sh
   invoke -r ops/lib test:server
   ```
 
-- View a detailed test coverage report:
+- View server test coverage report:
 
   ```sh
-  coverage html -d $PATH
+  invoke -r ops/lib test:server:coverage
+  # Open server/coverage/index.html
   ```
 
 ## Setting Up a Production Environment
