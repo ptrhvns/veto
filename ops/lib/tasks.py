@@ -34,29 +34,48 @@ def run(ctx, cmd, **kwargs):
         die(f"Command failed: {cmd}")
 
 
+@task(name="test:client")
+def test_client(ctx):
+    """Run client tests"""
+    notify("Running client tests")
+    with ctx.cd("client"):
+        run(ctx, "CI=true npm test", pty=True)
+
+
+@task(name="test:client:coverage")
+def test_client_coverage(ctx):
+    """Run client tests"""
+    notify("Running client tests with coverage")
+    with ctx.cd("client"):
+        run(ctx, "CI=true npm test -- --coverage", pty=True)
+
+
 @task(name="test:server")
 def test_server(ctx):
     """Run server tests"""
     notify("Running server tests")
     with ctx.cd("server"):
-        run(
-            ctx,
-            # TODO Switch to multi-process when run time would be improved.
-            # --numprocesses=auto
-            "pytest --cov-branch --cov=veto --exitfirst --no-cov-on-fail",
-            pty=True,
-        )
+        run(ctx, "pytest --exitfirst", pty=True)
 
 
 @task(name="test:server:coverage")
 def test_server_coverage(ctx):
     """Create server test coverage report"""
-    notify("Creating server test coverage report")
+    notify("Running server tests with coverage and generating report")
     with ctx.cd("server"):
+        run(
+            ctx, "pytest --cov-branch --cov=veto --exitfirst --no-cov-on-fail", pty=True
+        )
         run(ctx, "coverage html --directory coverage", pty=True)
 
 
-@task(test_server)
+@task(test_client, test_server, name="test:all")
+def test_all(ctx):
+    """Run all tests (client and server)"""
+    notify("All tests run")
+
+
+@task(test_all)
 def release(ctx):
     """Build and release the app"""
     root_directory = str(Path(__file__).resolve().parent.parent.parent)
