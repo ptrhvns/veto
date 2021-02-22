@@ -8,7 +8,9 @@ function NotFound() {
         <title>{buildTitle('Not Found')}</title>
       </Helmet>
 
-      <p>The page you requested was not found.</p>
+      <div data-testid="not-found">
+        <p>The page you requested was not found.</p>
+      </div>
     </>
   );
 }

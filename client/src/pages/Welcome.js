@@ -8,7 +8,9 @@ function Welcome() {
         <title>{buildTitle('Welcome')}</title>
       </Helmet>
 
-      <div>Welcome</div>
+      <div data-testid="welcome">
+        <div>Welcome</div>
+      </div>
     </>
   );
 }

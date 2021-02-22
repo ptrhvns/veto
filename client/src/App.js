@@ -1,27 +1,21 @@
 import NotFound from './pages/NotFound';
 import Welcome from './pages/Welcome';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { buildTitle } from './lib/utils';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <>
       <HelmetProvider>
-        <Helmet>
-          <title>{buildTitle()}</title>
-        </Helmet>
-
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Welcome />
-            </Route>
-            <Route path="*">
-              <NotFound />
-            </Route>
-          </Switch>
-        </Router>
+        <Switch>
+          <Route exact path="/">
+            <Welcome />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
       </HelmetProvider>
     </>
   );
