@@ -77,7 +77,7 @@ def test_all(ctx):
 
 @task(test_all)
 def release(ctx):
-    """Build and release the app"""
+    """Build and release the app to production"""
     root_directory = str(Path(__file__).resolve().parent.parent.parent)
     repo = Repo(root_directory)
 
