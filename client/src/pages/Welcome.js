@@ -26,7 +26,7 @@ function Welcome() {
                 />
               </h1>
               <h2 className="welcome-hero-subtitle">Make decisions faster.</h2>
-              <a className="welcome-hero-link" href>
+              <a className="welcome-hero-link">
                 Get Started
                 <FontAwesomeIcon
                   className="welcome-hero-link-icon"
