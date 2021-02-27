@@ -1,3 +1,16 @@
 @import-normalize;
 
 @import "styles/common/reset";
+
+@import "styles/common/colors";
+@import "styles/common/typography";
+
+@import "styles/common/decorations";
+// @import "styles/common/elements";
+// @import "styles/common/widgets";
+
+// @import "styles/components/Alert";
+// @import "styles/components/Navbar";
+// @import "styles/components/Signup";
+@import "styles/components/Container";
+@import "styles/pages/Welcome";
