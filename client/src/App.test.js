@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router';
 import { render, screen } from '@testing-library/react';
 
-function renderWithRouting(component, path) {
+function renderCustom(component, path) {
   render(
     <MemoryRouter initialEntries={[path]} initialIndex={0}>
       {component}
@@ -22,11 +22,16 @@ it('renders successfully', () => {
 });
 
 it('renders Welcome component for "/" route', () => {
-  renderWithRouting(<App />, '/');
+  renderCustom(<App />, '/');
   screen.getByTestId('welcome');
 });
 
+it('renders SignUp component for "/sign-up" route', () => {
+  renderCustom(<App />, '/sign-up');
+  screen.getByTestId('sign-up');
+});
+
 it('renders NotFound component for "/invalid" route', () => {
-  renderWithRouting(<App />, '/invalid');
+  renderCustom(<App />, '/invalid');
   screen.getByTestId('not-found');
 });

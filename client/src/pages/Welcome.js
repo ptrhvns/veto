@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 function Welcome() {
   return (
@@ -26,13 +27,13 @@ function Welcome() {
                 />
               </h1>
               <h2 className="welcome-hero-subtitle">Make decisions faster.</h2>
-              <a className="welcome-hero-link">
-                Get Started
+              <Link className="welcome-hero-link" to="/sign-up">
+                Sign up
                 <FontAwesomeIcon
                   className="welcome-hero-link-icon"
                   icon={faChevronRight}
                 />
-              </a>
+              </Link>
             </div>
           </Container>
         </Container>
