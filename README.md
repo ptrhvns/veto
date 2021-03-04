@@ -116,7 +116,7 @@ to get started.
 
 ## Setting Up a Production Environment
 
-- Setup Heroku. See their documentation.
+- Setup Heroku. See their [documentation](https://devcenter.heroku.com).
 
 - Setup environment variables:
 
