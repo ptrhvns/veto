@@ -118,6 +118,8 @@ to get started.
 
 - Setup Heroku. See their [documentation](https://devcenter.heroku.com).
 
+- Setup Sentry. See their [documentation](https://docs.sentry.io/).
+
 - Setup environment variables:
 
   ```sh
