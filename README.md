@@ -1,9 +1,8 @@
 # Veto
 
-This website helps users in a group select from a list of mutually exclusive
-choices while also helping to minimizing conflict. The following notes may not
-be sufficient to completely understand the project, but they are hopefully
-enough to get started.
+This website helps users make decisions faster. The following notes may not be
+sufficient to completely understand the project, but they are hopefully enough
+to get started.
 
 ## Architecture
 
