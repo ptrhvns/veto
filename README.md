@@ -73,7 +73,7 @@ to get started.
 
 ### All
 
-- Run all tests:
+- Run all tests (see server test notes about editable mode first):
 
   ```sh
   invoke -r ops/lib test:all
