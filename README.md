@@ -32,7 +32,7 @@ to get started.
 - Install server dependencies for development:
 
   ```sh
-  pip -r requirements.development.txt
+  pip -r requirements.dev.txt
   ```
 
 - Install Node.js:
@@ -66,7 +66,7 @@ to get started.
   set of static assets, and served by the server when visiting the root route):
 
   ```sh
-  honcho -f Procfile.development start
+  honcho -f Procfile.dev start
   ```
 
 ## Running Tests
@@ -101,7 +101,7 @@ to get started.
   (cd server; pip install -e .)
   ```
 
-- Run server tests (see the `pytest` plugins in `requirements.development.txt` for options):
+- Run server tests (see the `pytest` plugins in `requirements.dev.txt` for options):
 
   ```sh
   invoke -r ops/lib test:server
