@@ -45,8 +45,7 @@ to get started.
 - Install client dependencies:
 
   ```sh
-  cd client
-  npm install
+  (cd client; npm install)
   ```
 
 - Setup environment variables:
@@ -99,8 +98,7 @@ to get started.
 - Install server package in editable mode:
 
   ```sh
-  cd server
-  pip install -e .
+  (cd server; pip install -e .)
   ```
 
 - Run server tests (see the `pytest` plugins in `requirements.development.txt` for options):
