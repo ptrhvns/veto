@@ -161,7 +161,7 @@ def test_protect_request_from_csrf(app_fn):
         json = response[0]
         code = response[1]
         assert isinstance(json["msg"], str)
-        assert json["error_info"] == "INVALID_CSRF_TOKEN"
+        assert json["error_info"] == "CSRF_VALIDATION"
         assert code == HTTPStatus.FORBIDDEN.value
 
     with app.test_request_context():

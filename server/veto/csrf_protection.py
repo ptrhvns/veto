@@ -103,4 +103,4 @@ def protect_request_from_csrf():
         if request.accept_mimetypes.accept_html:
             return render_template(f"errors/{code}.jinja", msg=msg), code
         else:
-            return {"msg": msg, "error_info": "INVALID_CSRF_TOKEN"}, code
+            return {"msg": msg, "error_info": "CSRF_VALIDATION"}, code
