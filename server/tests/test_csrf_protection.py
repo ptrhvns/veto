@@ -147,6 +147,7 @@ def test_protect_request_from_csrf(app_fn):
         path=path,
     ):
         response = protect_request_from_csrf()
+        assert response is not None
         html = response[0]
         code = response[1]
         assert isinstance(html, str)
@@ -158,6 +159,7 @@ def test_protect_request_from_csrf(app_fn):
         path=path,
     ):
         response = protect_request_from_csrf()
+        assert response is not None
         json = response[0]
         code = response[1]
         assert isinstance(json["msg"], str)
