@@ -9,7 +9,6 @@ to get started.
 * The website is split into a client and a server.
 * The server is built with Python and Flask.
 * The client is built with React (via create-react-app).
-* Heroku is used for production deployments.
 * Sentry is used to track errors.
 
 ## Setting Up a Development Environment
@@ -112,54 +111,4 @@ to get started.
   ```sh
   invoke -r ops/lib test:server:coverage
   # Open server/coverage/index.html
-  ```
-
-## Setting Up a Production Environment
-
-- Setup Heroku. See their [documentation](https://devcenter.heroku.com).
-
-- Setup Sentry. See their [documentation](https://docs.sentry.io/).
-
-- Setup environment variables:
-
-  ```sh
-  # Use an appropriate value. Assumes only one domain and HTTPS.
-  # For example: https://$(heroku domains --json | jq -r '.[0].hostname')
-  heroku config:set CSRF_TARGET_ORIGIN=${CSRF_TARGET_ORIGIN}
-
-  heroku config:set FLASK_APP=server.app:app
-  heroku config:set FLASK_ENV=production
-  heroku config:set SENTRY_ENABLED=yes
-
-  # Use an appropriate value.
-  # For example: python -c 'import os; print(os.urandom(24).hex())'
-  heroku config:set SECRET_KEY=${SECRET_KEY}
-
-  # Use an appropriate value.
-  heroku config:set SENTRY_DSN=${SENTRY_DSN}
-
-  # Use an appropriate value.
-  heroku config:set SENTRY_TRACES_SAMPLE_RATE=${SENTRY_TRACES_SAMPLE_RATE}
-  ```
-
-## Releasing to Production
-
-- Manually test that website works locally using Heroku tools:
-
-  ```sh
-  heroku local
-  ```
-
-- Build project and deploy it to production on Heroku:
-
-  ```sh
-  # Assumes git remotes origin and heroku exist.
-  invoke -r ops/lib release
-  ```
-
-- Verify that production website is up and running:
-
-  ```sh
-  heroku logs
-  heroku open
   ```

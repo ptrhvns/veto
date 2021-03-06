@@ -73,30 +73,3 @@ def test_server_coverage(ctx):
 def test_all(ctx):
     """Run all tests (client and server)"""
     notify("All tests run")
-
-
-@task(test_all)
-def release(ctx):
-    """Build and release the app to production"""
-    root_directory = str(Path(__file__).resolve().parent.parent.parent)
-    repo = Repo(root_directory)
-
-    if repo.is_dirty():
-        die("Git repo is dirty")
-
-    notify("Building client")
-    with ctx.cd("client"):
-        run(ctx, "npm run build")
-
-    if repo.is_dirty():
-        notify("Adding new client build assets to Git repo")
-        run(ctx, "git add client/build")
-        run(ctx, "git commit -m 'Add new client build assets'")
-    else:
-        notify("No change detected in client build assets")
-
-    notify("Pushing Git repo to origin remote")
-    run(ctx, "git push origin main")
-
-    notify("Pushing Git repo to heroku remote")
-    run(ctx, "git push heroku main")
